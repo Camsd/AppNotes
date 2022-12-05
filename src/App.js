@@ -3,7 +3,7 @@ import './App.css';
 import Mensaje from './components/mensaje'
 
 function App() {
-  const [nombre, setNombre] = useState('tu puta madre');
+  const [nombre, setNombre] = useState('cambio 1');
   return(
     <div>
       <input type="text" onChange={ (e) => setNombre(e.target.value) } />
