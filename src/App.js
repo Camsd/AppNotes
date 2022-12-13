@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import Panel from './components/panel';
+import Menu from './components/menu';
 import './App.css';
-import Mensaje from './components/mensaje'
 
 function App() {
   // const [nombre, setNombre] = useState('cambio 1');
@@ -22,9 +23,9 @@ function App() {
   function handleClick(){
     const note = {
     id:2,
-    title: 'mi tercera nota nota',
+    title: 'mi tercera nota no debe pasar de 20 caracteres',
     text: '# Hola a todos',
-    pinned: false,
+    pinned: true,
     created: Date.now()
     };
     setItems([...items, note]);
@@ -32,24 +33,37 @@ function App() {
 
   return(
     <div className="App container">
-      <div className='panel'>
-        <div className='menu'>
-          <input className='search' placeholder='search....'></input>
-          <button className='btn' onClick={(e)=>handleClick()}>+ Nueva nota</button>
-        </div>
+      <Panel>
+        <Menu>
+        </Menu>
         <div className='list'>
             {
               items.map((item, i)=>{
-                return <div key={item.id}>{item.title}</div>
+                return <div key={item.id} className='note'>
+                  <div>
+                    {item.title === ''?'[Sin titulo]' : item.title.substring(0,20)}
+                  </div>
+
+                  <div>
+                    <button className='pinButton'>{item.pinned? 'Pinned': 'Pin'}</button>
+                  </div>
+                </div>
               })
             }
           </div>
-      </div>
+      </Panel>
       <div>
-        <div className='editor'></div>
+        <div className='editor'>
+          <div>
+            <input className='title' /></div>
+          </div>
+
+          <div className='editor-textarea'>
+          <textarea className='content'></textarea>
+          </div>
+        </div>
         <div className='preview'></div>
       </div>
-    </div>
   );
   
 }
